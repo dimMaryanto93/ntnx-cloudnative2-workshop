@@ -1,0 +1,2 @@
+curl -u admin:Nut4nixP@ssw0rd -k -X POST \
+        https://192.168.1.45:9440/api/nutanix/v3/blueprints/e1aeceb6-d0c7-4bd5-971d-c89838e1f216/simple_launch -H 'Content-Type: application/json' -d '{"spec": { "app_name": "APR_Hotel_development", "app_description": "Demo blueprint launch via the v3 REST API", "app_profile_reference": { "kind": "app_profile", "name": "Default", "uuid": "c71c439b-9bfd-4179-bb13-cae323d39a78"}}}'

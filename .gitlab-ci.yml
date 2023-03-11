@@ -1,0 +1,94 @@
+ stages:
+  - test
+  - build
+  - deploy
+ 
+ Application Unit Testing:
+    stage: test
+    image: 192.168.2.113:5000/laravel
+    variables:
+      GIT_DEPTH: 1
+ 
+    script:
+      - cp env.$CI_COMMIT_BRANCH .env
+      - php artisan key:generate
+      - echo "$(pwd)"
+      - vendor/bin/phpunit
+      - echo $CI_COMMIT_BRANCH
+      
+    only:
+       refs:
+         - development
+       variables:
+         - $CI_COMMIT_MESSAGE =~ /bungkus/
+    tags:
+      - kubernetes
+ 
+ Application Building:
+ 
+    stage: build
+    image: 192.168.2.113:5000/alpine
+    variables:
+      S3_BUCKET_NAME: "artifacts"
+      GIT_DEPTH: 1
+    only:
+       refs:
+         - development
+         - stagging
+         - master
+       variables:
+         - $CI_COMMIT_MESSAGE =~ /bungkus & bangun/
+         - $CI_COMMIT_MESSAGE =~ /bungkus & produksi/
+         - $CI_COMMIT_MESSAGE =~ /s3/
+  
+    script:
+      - tanggal=$(date +%F-%H%M%S)
+      - echo "$(pwd)"
+      - cp env.$CI_COMMIT_BRANCH .env
+      - echo $(ls)
+      - zip -r $tanggal.zip .
+      - echo $(ls)
+      - file=$tanggal.zip
+      - target=s3://artifacts/$CI_COMMIT_BRANCH/$file
+      - echo "aws s3 cp $file $target --endpoint-url=http://192.168.2.4:7200"
+      - aws s3 cp $tanggal.zip $target --endpoint-url=http://192.168.2.4:7200
+   
+    tags:
+      - kubernetes
+
+ Application Deployment Production:
+ 
+    stage: deploy
+    variables:
+      GIT_DEPTH: 1
+
+    script:
+     - echo "$(pwd)"
+     - echo "$(ls)"
+     - echo $USER
+     - echo $CI_COMMIT_BRANCH
+     - cp Dockerfile.$CI_COMMIT_BRANCH Dockerfile
+     - docker build -t laravel_image_$CI_COMMIT_BRANCH .
+     - docker tag laravel_image_$CI_COMMIT_BRANCH 192.168.2.113:5000/laravel_image_$CI_COMMIT_BRANCH
+     - docker push 192.168.2.113:5000/laravel_image_$CI_COMMIT_BRANCH
+     - >-
+      var="$(curl -u admin:Nut4nixP@ssw0rd -k -X POST -H 'Content-Type: application/json' https://192.168.1.45:9440/api/nutanix/v3/apps/list -d "{\"kind\":\"app\",\"filter\":\"name==APR_Hotel_"$CI_COMMIT_BRANCH"\"}")"
+     - if echo "$var" | grep -q '"total_matches":1';then hasil="cocok";else hasil="gagal";fi
+     - echo $hasil
+     - echo $var
+     - pembanding="cocok"
+     - echo $pembanding
+     - chmod +x BluePrint_Launch_$CI_COMMIT_BRANCH.sh
+     - chmod +x update_image_$CI_COMMIT_BRANCH.sh
+     - if [ "$hasil" == "$pembanding" ]; then ./update_image_$CI_COMMIT_BRANCH.sh; else ./BluePrint_Launch_$CI_COMMIT_BRANCH.sh;fi
+    only:
+      refs:
+        - development
+        - stagging
+        - master
+      variables:
+        - $CI_COMMIT_MESSAGE =~ /bungkus & produksi/
+        - $CI_COMMIT_MESSAGE =~ /nyalip/
+    tags:
+      - vm_runner
+
