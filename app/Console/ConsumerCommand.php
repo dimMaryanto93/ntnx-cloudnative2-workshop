@@ -109,7 +109,7 @@ class ConsumerCommand extends Command
         $conf->set('group.id', 'SubscriptionGroup');
 
         // Initial list of Kafka brokers
-        $conf->set('metadata.broker.list', env('KAFKA_BROKERS', '192.168.3.154:9092'));
+        $conf->set('metadata.broker.list', env('KAFKA_BROKERS'));
 
         // Set where to start consuming messages when there is no initial offset in
         // offset store or the desired offset is out of range.
