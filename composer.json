@@ -8,10 +8,9 @@
         "php": ">=5.6.4",
         "barryvdh/laravel-debugbar": "~2.4",
         "guzzlehttp/guzzle": "^6.5",
-        "nmred/kafka-php": "0.2.*",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "ext-rdkafka": "^4.0",
+        "ext-rdkafka": "^6.0",
         "predis/predis": "^1.1"
     },
     "require-dev": {
