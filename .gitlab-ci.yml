@@ -12,9 +12,9 @@
      - docker login https://registry.nutanix.com:5000 -u admin -p nutanix/4u
      - docker login -u ariefpri1122 -p nutanix/4u
      - cp Dockerfile.$CI_COMMIT_BRANCH Dockerfile
-     - docker build -t arief_laravel_$CI_COMMIT_BRANCH .
-     - docker tag arief_laravel_$CI_COMMIT_BRANCH registry.nutanix.com:5000/arief_laravel_$CI_COMMIT_BRANCH
-     - docker push registry.nutanix.com:5000/arief_laravel_$CI_COMMIT_BRANCH
+     - docker build -t dimas_laravel_$CI_COMMIT_BRANCH .
+     - docker tag dimas_laravel_$CI_COMMIT_BRANCH registry.nutanix.com:5000/dimas_laravel_$CI_COMMIT_BRANCH
+     - docker push registry.nutanix.com:5000/dimas_laravel_$CI_COMMIT_BRANCH
     only:
       refs:
         - development
