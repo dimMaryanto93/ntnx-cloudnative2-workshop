@@ -57,9 +57,9 @@ class ClientController extends Controller
 
     public function index()
     {
-        //$data = [];
+        $data = [];
 
-        $data['clients'] = $this->client->all();
+//        $data['clients'] = $this->client->all();
         //$data['clients'] = $this->client2->all();
 
         //$data['clients'] = Cache::remember('clients',10 * 60, function () {
@@ -67,14 +67,14 @@ class ClientController extends Controller
         //});
         
 
-        //$api = new api();
-        //$request = $api->get('http://192.168.1.126:8888/api/api_view');
-        //$response = $request->getBody()->getContents();
+        $api = new api();
+        $request = $api->get('http://10.42.18.88:9999/api/api_view');
+        $response = $request->getBody()->getContents();
 
-        //$data = json_decode($response);
-        //return view('client/index')->with('clients', $data);
+        $data = json_decode($response);
+        return view('client/index')->with('clients', $data);
 
-        return view('client/index', $data);
+//        return view('client/index', $data);
 
     }
 
