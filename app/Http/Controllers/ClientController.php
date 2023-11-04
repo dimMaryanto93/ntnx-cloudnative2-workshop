@@ -157,17 +157,16 @@ class ClientController extends Controller
             //dd($data);
             //event(new Event($data));
             
-            $client->create($data);
+//            $client->create($data);
 
-            //Client::create($request->only(['title','name', 'last_name', 'address', 'zip_code', 'city', 'state', 'email']));
+            Client::create($request->only(['title','name', 'last_name', 'address', 'zip_code', 'city', 'state', 'email']));
 
-            /*
-            $api = new api(["base_uri" => 'http://192.168.1.126:8888/']);
+            $api = new api(["base_uri" => 'http://10.42.18.88:9999/']);
             $options = [
                 'form_params' => $data
                 ];
             $response = $api->post("/api/api_new/", $options);
-            */
+
 
             return redirect('clients');
         }
@@ -184,17 +183,16 @@ class ClientController extends Controller
     public function show($client_id, Request $request)
     {
 
-        /*$hasil = [];
+        $hasil = [];
 
         $api = new api();
-        $request = $api->get('http://192.168.1.126:8888/api/api_view/' . $client_id );
+        $request = $api->get('http://10.42.18.88:9999/api/api_view/' . $client_id );
         $response = $request->getBody()->getContents();
         $client_data = json_decode($response);
 
         //dd($client_data);
-        */
 
-        $client_data = $this->client->find($client_id);
+//        $client_data = $this->client->find($client_id);
 
         $data = []; $data['client_id'] = $client_id;
         $data['titles'] = $this->titles;
@@ -232,15 +230,14 @@ class ClientController extends Controller
         $data['email'] = $request->input('email');
 
         //dd($data);
-        /*
-        $api = new api(["base_uri" => 'http://192.168.1.126:8888/']);
+
+        $api = new api(["base_uri" => 'http://10.42.18.88:9999/']);
         $options = [
             'form_params' => $data
             ];
         $response = $api->post("/api/api_view/" . $client_id, $options);
         //dd($response);
         return redirect('clients');
-        */
 
         if( $request->isMethod('post') )
         {
@@ -260,16 +257,16 @@ class ClientController extends Controller
             );
 
             $client_data = $this->client->find($client_id);
-            /*
+
             $hasil = [];
 
             $api = new api();
-            $request = $api->get('http://192.168.1.126:8888/api/api_view/' . $client_id );
+            $request = $api->get('http://10.42.18.88:9999/api/api_view/' . $client_id );
             $response = $request->getBody()->getContents();
             $client_data = json_decode($response);
 
             //dd($client_data);
-            */
+
             $client_data->title = $request->input('title');
             $client_data->name = $request->input('name');
             $client_data->last_name = $request->input('last_name');
@@ -279,8 +276,8 @@ class ClientController extends Controller
             $client_data->state = $request->input('state');
             $client_data->email = $request->input('email');
 
-            $client_data->save();
-            //$client_data->unsetEventDispatcher();
+//            $client_data->save();
+//            $client_data->unsetEventDispatcher();
 
             return redirect('clients');
         }
