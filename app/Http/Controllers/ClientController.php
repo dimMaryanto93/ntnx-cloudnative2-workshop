@@ -105,7 +105,7 @@ class ClientController extends Controller
         $hasil = [];
 
         $api = new api();
-        $request = $api->get('http://192.168.1.126:8888/api/api_view');
+        $request = $api->get('http://10.42.18.88:9999/api/api_view');
         $response = $request->getBody()->getContents();
 
         $hasil = json_decode($response);
