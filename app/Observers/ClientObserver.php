@@ -41,34 +41,33 @@ class ClientObserver
      *
      * @param  \App\Client $data
      * @return void
-    
+    */
     public function Created(Client $client)
     {
         $this->pushToKafka($client);
         //dd($client);
     }
-     */
+
 
     /**
      * Handle the inventory "updated" event.
      *
      * @param  \App\Client $data
      * @return void
-     
-    
+     */
     public function Saved(Client $client)
     {
         $this->pushToKafka($client);
     }
-    */
+
 
     /**
      * Handle the inventory "deleted" event.
      *
      * @param  \App\Client $client
      * @return void
-    
-     
+
+
     public function deleted(Client $client)
     {
         $this->pushToKafka($client);
