@@ -3,8 +3,8 @@
 @section('content') 
     <div class="row">
       <div class="medium-6 columns">
-        <h4>[MASTER ENVIRONMENT] - Dimas Maryanto 2 Workshop cloudnative</h4>
-        <img class="thumbnail" src="images/together.jpg">
+        <h4>[DEVELOPMENT ENVIRONMENT] - Dimas Maryanto 2 Workshop cloudnative</h4>
+        <img class="thumbnail" src="images\london.jpg">
       </div>
       <div class="medium-6 large-5 columns">
         </br>
