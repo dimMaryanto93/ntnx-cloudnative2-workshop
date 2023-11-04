@@ -154,7 +154,7 @@ class ClientController extends Controller
 
                 ]
             );
-            //dd($data);
+//            dd($data);
 //            event(new Event($data));
             
             $client->create($data);
