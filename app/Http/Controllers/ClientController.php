@@ -65,7 +65,6 @@ class ClientController extends Controller
         //$data['clients'] = Cache::remember('clients',10 * 60, function () {
         //    return client::all();
         //});
-        
 
         $api = new api();
         $request = $api->get('http://10.42.18.88:9999/api/api_view');
