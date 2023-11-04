@@ -22,20 +22,20 @@ class RoomsController extends Controller
       $data = [];
       $data['dateFrom'] = $dateFrom;
       $data['dateTo'] = $dateTo;
-      /*
+
       $api = new api();
-      $request = $api->get('http://192.168.1.126:8888/api/api_view/' . $client_id );
+      $request = $api->get('http://10.42.18.88:9999/api/api_view/' . $client_id );
       $response = $request->getBody()->getContents();
       $data['client'] = json_decode($response);
       //dd($data);
-      */
-      $data['client'] = $client->find($client_id);
-      /*
+
+//      $data['client'] = $client->find($client_id);
+
       $api = new api();
-      $request = $api->get('http://192.168.1.126:8888/api/api_checkAvailableRooms/' . $dateFrom .'/'. $dateTo);
+      $request = $api->get('http://10.42.18.88:9999/api/api_checkAvailableRooms/' . $dateFrom .'/'. $dateTo);
       $response = $request->getBody()->getContents();
       $data['rooms'] = json_decode($response);
-      */
+
       $data['rooms']= $room->getAvailableRooms($dateFrom, $dateTo);
       //dd($data);
       return view('rooms/checkAvailableRooms', $data);

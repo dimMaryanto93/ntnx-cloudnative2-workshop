@@ -18,20 +18,20 @@ class ReservationsController extends Controller
         $client_instance = new Client();
         $room_instance = new Room();
 
-        $client = $client_instance->find($client_id);
-        $room = $room_instance->find($room_id);
+//        $client = $client_instance->find($client_id);
+//        $room = $room_instance->find($room_id);
 
-        /*
+        
         $api = new api();
-        $request = $api->get('http://192.168.3.201:9999/api/api_view/' . $client_id );
+        $request = $api->get('http://10.42.18.88:9999/api/api_view/' . $client_id );
         $response = $request->getBody()->getContents();
         $client = json_decode($response);
 
         $api = new api();
-        $request = $api->get('http://192.168.3.201:9999/api/api_view/' . $room_id );
+        $request = $api->get('http://10.42.18.88:9999/api/api_view/' . $room_id );
         $response = $request->getBody()->getContents();
         $room = json_decode($response);
-        */
+        
 
         $reservation->date_in = $date_in;
         $reservation->date_out = $date_out;
@@ -42,13 +42,13 @@ class ReservationsController extends Controller
         {
             abort(405, 'Trying to book an already booked room');
         }
-        $reservation->save();
+//        $reservation->save();
         
-        /*
+
         $api = new api();
-        $request = $api->get('http://192.168.3.201:9999/api/api_book/room/' . $client_id .'/'. $room_id .'/'. $date_in .'/'. $date_out);
+        $request = $api->get('http://10.42.18.88:9999/api/api_book/room/' . $client_id .'/'. $room_id .'/'. $date_in .'/'. $date_out);
         $response = $request->getBody()->getContents();
-        */
+
 
         return redirect()->route('clients');
         //return view('reservations/bookRoom');
