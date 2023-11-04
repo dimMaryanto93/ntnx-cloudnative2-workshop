@@ -48,7 +48,6 @@ class ClientObserver
         //dd($client);
     }
 
-
     /**
      * Handle the inventory "updated" event.
      *
