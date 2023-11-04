@@ -155,9 +155,9 @@ class ClientController extends Controller
                 ]
             );
             //dd($data);
-            //event(new Event($data));
+            event(new Event($data));
             
-            $client->create($data);
+//            $client->create($data);
 
             //Client::create($request->only(['title','name', 'last_name', 'address', 'zip_code', 'city', 'state', 'email']));
 
