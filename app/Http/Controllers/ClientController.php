@@ -57,14 +57,14 @@ class ClientController extends Controller
 
     public function index()
     {
-        //$data = [];
+        $data = [];
 
-//        $data['clients'] = $this->client->all();
+        $data['clients'] = $this->client->all();
         //$data['clients'] = $this->client2->all();
 
-        $data['clients'] = Cache::remember('clients',10 * 60, function () {
-            return client::all();
-        });
+//        $data['clients'] = Cache::remember('clients',10 * 60, function () {
+//            return client::all();
+//        });
 
         //$api = new api();
         //$request = $api->get('http://192.168.1.126:8888/api/api_view');
